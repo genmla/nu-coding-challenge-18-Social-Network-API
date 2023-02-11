@@ -1,5 +1,5 @@
 {
-    "name": "18-social-network-api",
+    "name": "nu-coding-challenge-18-Social-Network-API",
     "version": "1.0.1",
     "description": "Mongoose back-end social network API for challenge 18",
     "main": "index.js", 
@@ -13,6 +13,7 @@
         "mongoose": "^6.0.13"
     }, 
     "devDependencies": {
-        "nodemon": "^2.0.9"
+        "nodemon": "^2.0.9",
+        "moment": "^2.29.4"
     }
 }
