@@ -13,7 +13,7 @@ const userSchema = new Schema(
             unique: true, 
             required: true,
             //validation matching regex for email provided by challenge 17
-            match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/]
+            match: [/^([a-zA-Z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/]
         },
         thoughts: [
             {
@@ -43,5 +43,5 @@ userSchema
         return this.friends.length;
     });
 
-    const User = model('course', userSchema);
+    const User = model('user', userSchema);
     module.exports = User;
