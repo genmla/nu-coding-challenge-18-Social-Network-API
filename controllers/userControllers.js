@@ -59,8 +59,40 @@ module.exports = {
                     //Bonus: delete all thoughts associated with that user id. plz. I need the bonus. plz
                     : Thought.deleteMany({ _id: { $in: user.thoughts } })
             )
-            .then(() => res.json({ message: 'User and user thoughts deleted!'}))
+            .then(() => res.json({ message: 'User and user thoughts deleted!' }))
             .catch((err) => res.status(500).json(err));
-    }
-}
+    },
+    //add a friend by friend id from a user by user id
+    addFriend(req, res) {
+        User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $addToSet: { friends: req.params.friendId } },
+            { runValidators: true, new: true }
+        )
+            .then((user) =>
+                !user
+                    ? res
+                        .status(404)
+                        .json({ message: 'No user found with that id!' })
+                    : res.json(user)
+            )
+            .catch((err) => res.status(500).json(err));
+    },
+    //delete a friend by a friend id from a user by user id
+    deleteFriend(req, res) {
+        User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $pull: { friends: req.params.friendId } },
+            { runValidators: true, new: true }
+        )
+            .then((user) =>
+                !user
+                    ? res
+                        .status(404)
+                        .json({ message: 'No user found with this id!' })
+                    : res.json(user)
+            )
+            .catch((err) => res.status(500).json(err));
+    },
+};
 
